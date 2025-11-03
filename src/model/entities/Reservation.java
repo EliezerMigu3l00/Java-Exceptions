@@ -40,16 +40,16 @@ public class Reservation {
 	}
 
 	public long duration() {
-		long diff = checkIn
-                .atStartOfDay(ZoneId.systemDefault())
-                .toInstant()
-                .toEpochMilli() - 
-                checkOut
-                .atStartOfDay(ZoneId.systemDefault())
-                .toInstant()
-                .toEpochMilli();
-		
-		return TimeUnit.DAYS.convert(diff, TimeUnit.MICROSECONDS);
+	    long diff = checkOut
+	            .atStartOfDay(ZoneId.systemDefault())
+	            .toInstant()
+	            .toEpochMilli() -
+	            checkIn
+	            .atStartOfDay(ZoneId.systemDefault())
+	            .toInstant()
+	            .toEpochMilli();
+
+	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 	
 	public void updatesDates(LocalDate checkIn, LocalDate checkOut) {
@@ -59,7 +59,7 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation:  Room " + roomNumber + ", check-in: " + checkIn.format(formatador) + ", check-out: " + checkOut.format(formatador) + ", " + duration() + " nights";
+		return "Reservation: Room " + roomNumber + ", check-in: " + checkIn.format(formatador) + ", check-out: " + checkOut.format(formatador) + ", " + duration() + " nights";
 	}
 	
 }
